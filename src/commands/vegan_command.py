@@ -1,9 +1,7 @@
-import asyncio
-
 from pyrogram import Client
 from pyrogram import types
 from src.BaseCommand import BaseCommand
-from utils.periodic import Periodic
+from src.utils.periodic import Periodic
 
 
 async def quest(c: Client):

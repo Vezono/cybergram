@@ -1,6 +1,6 @@
 from pyrogram import Client
 from pyrogram import types
-
+import asyncio
 
 class BaseCommand:
     def __init__(self, text="basic"):
@@ -12,3 +12,8 @@ class BaseCommand:
     async def execute(self, c: Client, m: types.Message):
         await self.notice(c)
         await c.send_message('me', 'Basic command executed. Check your code btw')
+
+    def get_normal_from_async(function, *args, **kwargs):
+        asyncio.get_event_loop().create_task(function(*args, **kwargs))
+
+

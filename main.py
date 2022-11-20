@@ -5,10 +5,8 @@ from src.logger import Logger
 from src.ftl import FTL
 from src import get_registry
 
-app = Logger()
-client = Client("tear", api_id=app.config['api_id'], api_hash=app.config['api_hash'])
+from startup import app, client
 ftl = FTL(get_registry(app.config))
-
 
 def check_if_command(f, c, u):
     if not ftl.id:

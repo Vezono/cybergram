@@ -13,23 +13,23 @@ from startup import app, client
 registry = get_registry(app.config)
 registry.load_resources(client)
 processor = Processor(registry)
-client.stop()
 
 def check_if_command(f, c, u):
     if not u.text:
         return False
     
-    if not u.text.startswith('.'):
+    if not u.from_user:
         return False
 
-    if not u.from_user.id == processor.id:
+    if not u.from_user.id == c.id:
+        return False
+
+    if not u.text.startswith('.'):
         return False
     return True
     
-
-
 @client.on_message(filters.create(check_if_command, "userbot_command"))
-async def hello(c: Client, m):
+async def command_hub(c: Client, m):
     await processor.process_command(c, m)
 
 

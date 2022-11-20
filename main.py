@@ -1,3 +1,7 @@
+import time
+from threading import Thread
+
+import schedule
 from pyrogram import Client, filters
 from pyrogram.handlers import *
 
@@ -6,7 +10,9 @@ from src.processor import Processor
 from src import get_registry
 
 from startup import app, client
-processor = Processor(get_registry(app.config))
+registry = get_registry(app.config)
+registry.load_resources(client)
+processor = Processor(registry)
 client.stop()
 
 def check_if_command(f, c, u):
@@ -31,4 +37,10 @@ async def hello(c: Client, m):
 async def listener_hub(c, m):
     await processor.process_listener(c, m)
 
+def sched():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+Thread(target=sched).start()
 client.run()

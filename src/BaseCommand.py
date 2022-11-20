@@ -17,11 +17,10 @@ class BaseCommand:
         await self.notice(c)
         await c.send_message('me', 'Basic command executed. Check your code btw')
 
-    def get_normal_from_async(self, function, *args, **kwargs):
-        try:
-            asyncio.run(function(*args, **kwargs))
-        except:
-            pass
-        #asyncio.get_event_loop().create_task(function(*args, **kwargs))
+    def load_resources(self, *args, **kwargs):
+        pass
+
+    def get_normal_from_async(function, *args, **kwargs):
+        asyncio.run(function(*args, **kwargs))
 
 

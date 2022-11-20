@@ -17,16 +17,6 @@ class Logger:
     def jsonize(self, m):
         return json.loads(str(m))
 
-    def handler(self, c, m: Message):
-        if self.ignored(m):
-            return
-        chat_id = m.from_user.id
-        if m.chat:
-            chat_id = m.chat.id
-        data = self.load_json('dump.json')
-        data.update({f'{chat_id}_{m.id}': self.jsonize(m)})
-        self.write_json('dump.json', data)
-
     def ignored(self, m):
         if not m.chat:
             return False

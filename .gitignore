@@ -2,4 +2,4 @@
 run
 venv
 __pycache__
-*.session
+*.session*

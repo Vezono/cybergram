@@ -1,7 +1,7 @@
 from src.Registry import Registry
 
 
-class FTL:
+class Processor:
     def __init__(self, registry: Registry):
         self.id = None
         self.registry = registry

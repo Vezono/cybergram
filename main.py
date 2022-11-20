@@ -1,3 +1,7 @@
+import time
+from threading import Thread
+
+import schedule
 from pyrogram import Client, filters
 from pyrogram.handlers import *
 
@@ -7,7 +11,9 @@ from src import get_registry
 
 app = Logger()
 client = Client("tear", api_id=app.config['api_id'], api_hash=app.config['api_hash'])
-ftl = FTL(get_registry(app.config))
+registry = get_registry(app.config)
+registry.load_resources(client)
+ftl = FTL(registry)
 
 
 def check_if_command(f, c, u):
@@ -37,7 +43,12 @@ async def hello(c, m):
 async def hello(c, m):
     await ftl.process_listener(c, m)
 
+def sched():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
 client.add_handler(MessageHandler(app.handler))
 
-
+Thread(target=sched).start()
 client.run()

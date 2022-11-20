@@ -1,5 +1,6 @@
 from typing import List
 
+from src.BaseCommand import BaseCommand
 from src.BaseListener import BaseListener
 
 
@@ -7,8 +8,16 @@ class Registry:
     def __init__(self):
         self.registry = {}
         self.listeners: List[BaseListener] = []
+        self.commands: List[BaseCommand] = []
+
+    def load_resources(self, client):
+        for i in self.listeners:
+            i.load_resources(client)
+        for i in self.commands:
+            i.load_resources(client)
 
     def register_command(self, command):
+        self.commands.append(command)
         self.registry.update({
             command.text: command.execute
         })

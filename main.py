@@ -1,17 +1,22 @@
 import time
+from threading import Thread
 
 import schedule
 
 from user import User
 from pyrogram import idle
-from os.path import exists
+
+
+def some():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
 
 open('accounts.txt', 'a').close()
 with open('accounts.txt') as f:
     accounts = f.read().splitlines()
 for account in accounts:
     User(account)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+Thread(target=some).start()
+idle()

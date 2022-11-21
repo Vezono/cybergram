@@ -22,6 +22,9 @@ class VeganPlanCommand(BaseCommand):
         schedule.every().day.at("07:58").do(get_normal_from_async, self.send, c)
         schedule.every().day.at("15:58").do(get_normal_from_async, self.send, c)
         schedule.every().day.at("23:58").do(get_normal_from_async, self.send, c)
+        schedule.every().day.at("08:03").do(get_normal_from_async, self.send_after, c)
+        schedule.every().day.at("16:03").do(get_normal_from_async, self.send_after, c)
+        schedule.every().day.at("00:03").do(get_normal_from_async, self.send_after, c)
 
     async def execute(self, c: Client, m: types.Message):
         await m.delete()
@@ -32,6 +35,11 @@ class VeganPlanCommand(BaseCommand):
         self.last_target = target
 
     async def send(self, c: Client):
-        print("ss")
         await c.send_message(5505670334, variants[self.last_target])
+        await c.send_message(5505670334, "/off_goodsleep")
+        await c.send_message(5505670334, "/use_bicepc")
         self.last_target = "def"
+
+    async def send_after(self, c: Client):
+        await c.send_message(5505670334, "/off_bicepc")
+        await c.send_message(5505670334, "/use_goodsleep")

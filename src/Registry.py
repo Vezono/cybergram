@@ -16,6 +16,12 @@ class Registry:
         for i in self.commands:
             i.load_resources(client)
 
+    def inject_client(self, client):
+        for i in self.listeners:
+            i.client = client
+        for i in self.commands:
+            i.client = client
+
     def register_command(self, command):
         self.commands.append(command)
         self.registry.update({

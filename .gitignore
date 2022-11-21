@@ -3,3 +3,5 @@ run
 venv
 __pycache__
 *.session*
+accounts
+accounts.txt

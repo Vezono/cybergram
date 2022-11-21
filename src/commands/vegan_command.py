@@ -2,13 +2,12 @@ from pyrogram import Client
 from pyrogram import types
 from src.BaseCommand import BaseCommand
 from src.utils.periodic import Periodic
-from startup import app
 
 async def quest(c: Client):
     try:
         await c.request_callback_answer(
             chat_id=5505670334,
-            message_id=app.config['farm_message'],
+            message_id=c.user.storage.config['farm_message'],
             callback_data="quest_select?castle_protect",
             timeout=1
         )

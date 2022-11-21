@@ -1,3 +1,7 @@
+import time
+
+import schedule
+
 from user import User
 from pyrogram import idle
 from os.path import exists
@@ -8,4 +12,6 @@ with open('accounts.txt') as f:
 for account in accounts:
     User(account)
 
-idle()
+while True:
+    schedule.run_pending()
+    time.sleep(1)

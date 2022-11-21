@@ -25,14 +25,10 @@ class User:
         self.processor = Processor(self.registry)
 
         self.initialize_handlers()
-        self.initialize_schedule()
         self.initialize_client()
 
     def initialize_client(self):
         self.run()
-
-    def initialize_schedule(self):
-        Thread(target=self.scheduler, name=f"{self.name}-schedule").start()
 
     def initialize_handlers(self):
         @self.client.on_message(filters.create(self.check_if_command, "userbot_command"))
@@ -46,11 +42,6 @@ class User:
 
     def run(self):
         self.client.start()
-
-    def scheduler(self):
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
 
     def check_if_command(self, c, u):
         if not u.text:

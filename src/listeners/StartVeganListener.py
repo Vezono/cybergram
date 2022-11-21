@@ -4,7 +4,7 @@ from src.BaseListener import BaseListener
 from src.commands.vegan_command import q_start
 
 
-class StopVeganListener(BaseListener):
+class StartVeganListener(BaseListener):
 
     def __init__(self):
         super().__init__()

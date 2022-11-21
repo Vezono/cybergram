@@ -9,9 +9,10 @@ from src.commands.vegan_plan_command import VeganPlanCommand
 from src.commands.wolfram_command import WolframCommand
 from src.commands.message_info_command import MessageInfoCommand
 from src.commands.vegan_command import VeganCommand
-
+from src.commands.dick_command import DickCommand
 from src.listeners.CheckListener import CheckListener
 from src.listeners.StopVeganListener import StopVeganListener
+from src.listeners.StartVeganListener import StartVeganListener
 
 
 def get_registry(config: dict) -> Registry:
@@ -25,6 +26,8 @@ def get_registry(config: dict) -> Registry:
     registry.register_command(MessageInfoCommand())
     registry.register_command(VeganCommand())
     registry.register_command(VeganPlanCommand())
+    registry.register_command(DickCommand())
     registry.register_listener(CheckListener())
     registry.register_listener(StopVeganListener())
+    registry.register_listener(StartVeganListener())
     return registry

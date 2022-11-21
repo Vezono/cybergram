@@ -11,5 +11,5 @@ class StopVeganListener(BaseListener):
 
     async def execute(self, c: Client, m: types.Message):
         if m.text == "Недостаточно выносливости!" and m.chat.id == 5505670334:
-            await VeganCommand.task.stop()
+            await c.vegan_task.stop()
             await c.send_message("me", "vegan ended")

@@ -3,6 +3,7 @@ from pyrogram import types
 from src.BaseCommand import BaseCommand
 from src.utils.periodic import Periodic
 
+
 async def quest(c: Client):
     try:
         await c.request_callback_answer(
@@ -16,8 +17,8 @@ async def quest(c: Client):
 
 
 async def q_start(c):
-    VeganCommand.task = Periodic(quest, 185, c)
-    await VeganCommand.task.start()
+    c.vegan_task = Periodic(quest, 185, c)
+    await c.vegan_task.start()
 
 
 class VeganCommand(BaseCommand):

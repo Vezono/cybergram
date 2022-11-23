@@ -19,12 +19,12 @@ class VeganPlanCommand(BaseCommand):
         self.last_target = "def"
 
     def load_resources(self, c: Client):
-        schedule.every().day.at("07:58").do(get_normal_from_async, self.send, c)
-        schedule.every().day.at("15:58").do(get_normal_from_async, self.send, c)
-        schedule.every().day.at("23:58").do(get_normal_from_async, self.send, c)
-        schedule.every().day.at("08:03").do(get_normal_from_async, self.send_after, c)
-        schedule.every().day.at("16:03").do(get_normal_from_async, self.send_after, c)
-        schedule.every().day.at("00:03").do(get_normal_from_async, self.send_after, c)
+        schedule.every().day.at("07:58", "Europe/Moscow").do(get_normal_from_async, self.send, c)
+        schedule.every().day.at("15:58", "Europe/Moscow").do(get_normal_from_async, self.send, c)
+        schedule.every().day.at("23:58", "Europe/Moscow").do(get_normal_from_async, self.send, c)
+        schedule.every().day.at("08:03", "Europe/Moscow").do(get_normal_from_async, self.send_after, c)
+        schedule.every().day.at("16:03", "Europe/Moscow").do(get_normal_from_async, self.send_after, c)
+        schedule.every().day.at("00:03", "Europe/Moscow").do(get_normal_from_async, self.send_after, c)
 
     async def execute(self, c: Client, m: types.Message):
         await m.delete()

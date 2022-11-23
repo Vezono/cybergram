@@ -1,7 +1,7 @@
 pyrogram~=2.0.62
 tgcrypto
 wolframalpha~=5.0.0
-schedule
-
+git+https://github.com/dbader/schedule#egg=schedule
 langdetect
 emoji-country-flag
+pytz

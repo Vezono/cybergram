@@ -18,5 +18,6 @@ class SilentUserInfoCommand(BaseCommand):
         tts = 'User info:\n'
         tts += f'ID: {user.id}\n'
         tts += f'Username {user.username}\n'
-        tts += f'First Name: {user.first_name}'
+        tts += f'First Name: {user.first_name}\n'
+        tts += f'Online status: {user.status.value}'
         return tts

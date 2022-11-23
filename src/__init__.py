@@ -10,6 +10,9 @@ from src.commands.wolfram_command import WolframCommand
 from src.commands.message_info_command import MessageInfoCommand
 from src.commands.vegan_command import VeganCommand
 from src.commands.dick_command import DickCommand
+from src.commands.doeb_command import DoebCommand
+from src.commands.doeb_cancel_command import DoebCancelCommand
+
 from src.listeners.CheckListener import CheckListener
 from src.listeners.StopVeganListener import StopVeganListener
 from src.listeners.StartVeganListener import StartVeganListener
@@ -27,6 +30,8 @@ def get_registry(config: dict) -> Registry:
     registry.register_command(VeganCommand())
     registry.register_command(VeganPlanCommand())
     registry.register_command(DickCommand())
+    registry.register_command(DoebCommand())
+    registry.register_command(DoebCancelCommand())
     registry.register_listener(CheckListener())
     registry.register_listener(StopVeganListener())
     registry.register_listener(StartVeganListener())

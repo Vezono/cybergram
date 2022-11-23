@@ -5,3 +5,4 @@ __pycache__
 accounts
 resources
 accounts.txt
+accounts.toml

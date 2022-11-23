@@ -3,11 +3,6 @@ from importlib import import_module
 
 
 def load_modules(package: str = "src/modules"):
-    """
-    Iterates over a package and returns classes of the same name with their modules
-        Keyword arguments:
-        package -- relative path to the package (default "src/commands/common")
-    """
     for _, name, _ in iter_modules([package]):
         path = f"{package.replace('/', '.')}.{name}"
         module = import_module(f"{package.replace('/', '.')}.{name}")

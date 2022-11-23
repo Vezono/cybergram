@@ -1,7 +1,8 @@
 from pyrogram import Client, filters
 from pyrogram.handlers import *
 
-import schedule
+import datetime as dt
+import scheduler
 from threading import Thread
 import asyncio
 import time
@@ -13,6 +14,8 @@ class User:
     def __init__(self, name):
         self.name = name
 
+        self.schedule = scheduler.Scheduler(tzinfo=dt.timezone.utc)
+
         self.storage = Storage(name)
         self.client = Client(self.storage.path, self.storage.api_id, self.storage.api_hash)
         self.client.user = self
@@ -23,8 +26,17 @@ class User:
         
         self.processor = Processor(self.registry)
 
+        self.inject_id()
+        self.initialize_sceduler()
         self.initialize_handlers()
         self.initialize_client()
+
+    def inject_id(self):
+        with self.client as client:
+            self.client.id = client.get_me().id
+
+    def initialize_sceduler(self):
+        Thread(target=self.run_schedule).start()
 
     def initialize_client(self):
         self.run()
@@ -38,6 +50,11 @@ class User:
         @self.client.on_message()
         async def listener_hub(c, m):
             await self.processor.process_listener(c, m)
+
+    def run_schedule(self):
+        while True:
+            self.schedule.exec_jobs()
+            time.sleep(1)
 
     def run(self):
         self.client.start()

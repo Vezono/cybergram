@@ -5,4 +5,4 @@ from .vegan_command import VeganCommand
 from .vegan_plan_command import VeganPlanCommand
 
 commands = [VeganCommand, VeganPlanCommand]
-listeners = [StartVeganListener, StartVeganListener]
+listeners = [StopVeganListener, StartVeganListener]

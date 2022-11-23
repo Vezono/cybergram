@@ -6,15 +6,14 @@ from threading import Thread
 import asyncio
 import time
 
-from src.storage import StorageCore
-from src.processor import Processor
+from src.core import Storage, Processor
 from src import get_registry
 
 class User:
     def __init__(self, name):
         self.name = name
 
-        self.storage = StorageCore(name)
+        self.storage = Storage(name)
         self.client = Client(self.storage.path, self.storage.api_id, self.storage.api_hash)
         self.client.user = self
 

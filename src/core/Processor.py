@@ -1,4 +1,4 @@
-from src.Registry import Registry
+from src.core import Registry
 
 
 class Processor:

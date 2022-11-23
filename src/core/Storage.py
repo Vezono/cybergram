@@ -7,7 +7,7 @@ from pyrogram.types import Message
 from src import constants
 
 
-class StorageCore:
+class Storage:
     def __init__(self, name, type='accounts'):
         self.name = name
         self.type = type

@@ -1,5 +1,5 @@
 
-from src.Registry import Registry
+from src.core import Registry
 from src.commands.boot import BootModule
 
 from src.commands.ping_command import PingCommand

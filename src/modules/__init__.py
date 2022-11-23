@@ -2,8 +2,6 @@ from pkgutil import iter_modules
 from importlib import import_module
 import tomli
 
-with open("tic_tac_toe.toml", mode="rb") as fp:
-     config = tomli.load(fp)
 
 
 def load_modules(package: str = "src/modules"):

@@ -225,8 +225,10 @@ class LangStatListener(BaseListener):
             return
 
         stats = c.user.storage.load_json('langstat.json')
-
-        lang = detect(m.text)
+        try:
+            lang = detect(m.text)
+        except:
+            lang = 'en'
         flag_emoji = self.detect_flag(lang)
 
         if not lang in stats:

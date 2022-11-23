@@ -12,11 +12,12 @@ from src.commands.vegan_command import VeganCommand
 from src.commands.dick_command import DickCommand
 from src.commands.doeb_command import DoebCommand
 from src.commands.doeb_cancel_command import DoebCancelCommand
+from src.commands.bncsolve_command import BNCSolveCommand
 
 from src.listeners.CheckListener import CheckListener
 from src.listeners.StopVeganListener import StopVeganListener
 from src.listeners.StartVeganListener import StartVeganListener
-
+from src.listeners.BncListener import BNCListener
 
 def get_registry(config: dict) -> Registry:
     registry = Registry()
@@ -25,14 +26,17 @@ def get_registry(config: dict) -> Registry:
     registry.register_command(PingCommand())
     registry.register_command(SilentChatInfoCommand())
     registry.register_command(SilentUserInfoCommand())
-    registry.register_command(WolframCommand(config["wolfram"]))
+    registry.register_command(WolframCommand())
     registry.register_command(MessageInfoCommand())
     registry.register_command(VeganCommand())
     registry.register_command(VeganPlanCommand())
     registry.register_command(DickCommand())
     registry.register_command(DoebCommand())
     registry.register_command(DoebCancelCommand())
+    registry.register_command(BNCSolveCommand())
+
     registry.register_listener(CheckListener())
     registry.register_listener(StopVeganListener())
     registry.register_listener(StartVeganListener())
+    registry.register_listener(BNCListener())
     return registry

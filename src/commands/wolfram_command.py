@@ -5,11 +5,13 @@ from src.BaseCommand import BaseCommand
 
 
 class WolframCommand(BaseCommand):
-    def __init__(self, token):
+    def __init__(self):
         super().__init__('w')
-        self.wclient = wolframalpha.Client(token)
+        self.wclient = None
 
     async def execute(self, c: Client, m: types.Message):
+        if not self.wclient:
+            self.wclient = wolframalpha.Client(c.user.storage.config['token'])
         res = self.wclient.query(m.text.replace(".w ", ""))
         text = ""
         for pod in res.results:

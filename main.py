@@ -1,6 +1,5 @@
 import time
 from threading import Thread
-
 import schedule
 
 from user import User

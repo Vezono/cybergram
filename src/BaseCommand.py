@@ -8,7 +8,7 @@ class BaseCommand:
         self.on_start()
 
     def on_start(self):
-        print(f'Module {self.text} loaded.')
+        pass
 
     async def notice(self, c: Client):
         await c.send_message('me', f'{self.text} usage notice')

@@ -5,7 +5,6 @@ import schedule
 from user import User
 from pyrogram import idle
 
-
 def some():
     while True:
         schedule.run_pending()

@@ -1,7 +1,7 @@
 from pyrogram import types, Client
 
 from src.BaseListener import BaseListener
-from src.commands.vegan_command import VeganCommand
+from .vegan_command import VeganCommand
 
 
 class StopVeganListener(BaseListener):

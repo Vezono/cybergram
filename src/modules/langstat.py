@@ -1,6 +1,7 @@
 from pyrogram import types, Client
 
 from src.BaseListener import BaseListener
+from src.BaseCommand import BaseCommand
 
 from langdetect import detect
 import flag
@@ -167,6 +168,48 @@ codes = {
     'zu': 'ZA'
   }
 
+
+class LangStatCommand(BaseCommand):
+    def __init__(self):
+        super().__init__('langstat')
+
+    async def execute(self, c: Client, m: types.Message):
+        await m.edit(self.render())
+
+    def load_resources(self, client):
+        self.client = client
+
+    def detect_flag(self, lang):
+        return flag.flag(codes[lang])
+
+    def render(self):
+        stats = self.client.user.storage.load_json('langstat.json')
+        percentages = {}
+        overall_count = sum([stats[lang] for lang in stats])
+        for lang in stats:
+            percentage = str(stats[lang]/overall_count*100).split('.')
+            percentage = float(f'{percentage[0]}.{percentage[1][:1]}')
+            percentages.update({
+                lang: percentage
+            })
+
+
+        percentages = dict(sorted(percentages.items(),key= lambda x:x[1], reverse = True))
+        tts = 'Статистика за мовами:\n'
+
+        tiny_percentage = 0
+        for lang in percentages:
+            if percentages[lang] >= 1:
+                continue
+            tiny_percentage += percentages[lang]
+        
+        for lang in percentages:
+            if percentages[lang] <= 1:
+                continue
+            tts += f'{self.detect_flag(lang)} - {percentages[lang]}%'+'\n'
+        tts += f'🏴 - {tiny_percentage}%'
+        return tts
+
 class LangStatListener(BaseListener):
 
     def __init__(self):
@@ -194,3 +237,6 @@ class LangStatListener(BaseListener):
         })
 
         c.user.storage.write_json('langstat.json', stats)
+
+commands = [LangStatCommand]
+listeners = [LangStatListener]

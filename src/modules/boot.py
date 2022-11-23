@@ -16,6 +16,8 @@ class BootModule(BaseCommand):
 
     def on_start(self):
         with self.client as client:
-            client.send_message('me', 'Boot started.')
             client.id = client.get_me().id
-            print('ID Injected.')
+            print(f'[Boot]: {client.user.name} started')
+
+commands = [BootModule]
+listeners = []

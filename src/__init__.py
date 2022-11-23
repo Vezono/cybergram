@@ -1,46 +1,14 @@
 
 from src.core import Registry
-from src.commands.boot import BootModule
+from src.modules import load_modules
 
-from src.commands.ping_command import PingCommand
-from src.commands.silent_chat_info_command import SilentChatInfoCommand
-from src.commands.silent_user_info_command import SilentUserInfoCommand
-from src.commands.vegan_plan_command import VeganPlanCommand
-from src.commands.wolfram_command import WolframCommand
-from src.commands.message_info_command import MessageInfoCommand
-from src.commands.vegan_command import VeganCommand
-from src.commands.dick_command import DickCommand
-from src.commands.doeb_command import DoebCommand
-from src.commands.doeb_cancel_command import DoebCancelCommand
-from src.commands.bncsolve_command import BNCSolveCommand
-from src.commands.lang_stat_command import LangStatCommand
-
-from src.listeners.CheckListener import CheckListener
-from src.listeners.StopVeganListener import StopVeganListener
-from src.listeners.StartVeganListener import StartVeganListener
-from src.listeners.BncListener import BNCListener
-from src.listeners.LangStatListener import LangStatListener
-
-def get_registry(config: dict) -> Registry:
+def get_registry(storage) -> Registry:
     registry = Registry()
-    registry.register_command(BootModule())
-    
-    registry.register_command(PingCommand())
-    registry.register_command(SilentChatInfoCommand())
-    registry.register_command(SilentUserInfoCommand())
-    registry.register_command(WolframCommand())
-    registry.register_command(MessageInfoCommand())
-    registry.register_command(VeganCommand())
-    registry.register_command(VeganPlanCommand())
-    registry.register_command(DickCommand())
-    registry.register_command(DoebCommand())
-    registry.register_command(DoebCancelCommand())
-    registry.register_command(BNCSolveCommand())
-    registry.register_command(LangStatCommand())
-
-    registry.register_listener(CheckListener())
-    registry.register_listener(StopVeganListener())
-    registry.register_listener(StartVeganListener())
-    registry.register_listener(BNCListener())
-    registry.register_listener(LangStatListener())
+    for module in load_modules():
+        commands, listeners, name = module
+        for command in commands:
+            registry.register_command(command())
+        for listener in listeners:
+            registry.register_listener(listener())
+        print(f'[Registry]: {storage.name} has loaded {name}')
     return registry

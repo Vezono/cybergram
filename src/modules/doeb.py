@@ -7,6 +7,14 @@ from pyrogram.enums import UserStatus
 from src.BaseCommand import BaseCommand
 
 
+class DoebCancelCommand(BaseCommand):
+    def __init__(self):
+        super().__init__('nodoeb')
+
+    async def execute(self, c: Client, m: types.Message):
+        c.is_doeb_running = False
+
+
 class DoebCommand(BaseCommand):
     def __init__(self):
         super().__init__('doeb')
@@ -22,3 +30,5 @@ class DoebCommand(BaseCommand):
                 await c.send_message(chat_id, text)
                 await sleep(120)
 
+commands = [DoebCancelCommand, DoebCommand]
+listeners = []

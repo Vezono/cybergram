@@ -16,3 +16,6 @@ class DickCommand(BaseCommand):
             user = m.reply_to_message.from_user
         await m.delete()
         await c.send_message(m.chat.id, f'Размер члена {user.first_name} - {size} см')
+
+commands = [DickCommand]
+listeners = []

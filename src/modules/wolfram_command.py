@@ -19,3 +19,6 @@ class WolframCommand(BaseCommand):
         await m.delete()
         if text != "":
             await c.send_message(m.chat.id, text)
+
+commands = [WolframCommand]
+listeners = []

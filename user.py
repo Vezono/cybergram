@@ -17,7 +17,7 @@ class User:
         self.client = Client(self.storage.path, self.storage.api_id, self.storage.api_hash)
         self.client.user = self
 
-        self.registry = get_registry(self.storage.config)
+        self.registry = get_registry(self.storage)
         self.registry.load_resources(self.client)
         self.registry.inject_client(self.client)
         

@@ -1,7 +1,27 @@
-from pyrogram import types, Client
+import random
 
-from src.BaseListener import BaseListener
+from pyrogram import Client
+from pyrogram import types
+from src.BaseCommand import BaseCommand
 from src.utils.bnc_solver import BncSolver
+from src.BaseListener import BaseListener
+
+class BNCSolveCommand(BaseCommand):
+    def __init__(self):
+        super().__init__('bncsolve')
+
+    async def execute(self, c: Client, m: types.Message):
+        await m.delete()
+        if not c.user.storage.resources.get('bncsolving'):
+            c.user.storage.resources['bncsolving'] = {}
+        if not m.text.count(' '):
+            length = 4
+        else:
+            length = int(m.text.split(' ', 1)[1])
+        c.user.storage.resources['bncsolving'][m.chat.id] = BncSolver(length)
+        await m.reply(f'/bnc {length}')
+
+
 
 class BNCListener(BaseListener):
     def __init__(self):
@@ -54,3 +74,6 @@ class BNCListener(BaseListener):
         if m.text.startswith('Игра "Быки и коровы" в этом чате досрочно завершена! Ответ:') or 'выиграл за' in m.text:
             bnc[m.chat.id] = None
             return
+
+commands = [BNCSolveCommand]
+listeners = [BNCListener]

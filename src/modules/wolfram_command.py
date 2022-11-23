@@ -18,8 +18,8 @@ class WolframCommand(BaseCommand):
         text = ""
         for pod in res.results:
             text += pod.text + "\n"
-        if text != "":
-            await m.edit(f'Request: {req}\nAnswer: Loading...')
+        if text:
+            await m.edit(f'Request: {req}\nAnswer: {text}')
         else:
             await m.edit(f'Request: {req}\nAnswer: Nothing found!')
 

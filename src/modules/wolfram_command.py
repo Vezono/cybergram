@@ -12,13 +12,16 @@ class WolframCommand(BaseCommand):
     async def execute(self, c: Client, m: types.Message):
         if not self.wclient:
             self.wclient = wolframalpha.Client(c.user.storage.config['wolfram'])
-        res = self.wclient.query(m.text.replace(".w ", ""))
+        req = m.text.replace(".w ", "")
+        await m.edit(f'Request: {req}\nAnswer: Loading...')
+        res = self.wclient.query(req)
         text = ""
         for pod in res.results:
             text += pod.text + "\n"
-        await m.delete()
         if text != "":
-            await c.send_message(m.chat.id, text)
+            await m.edit(f'Request: {req}\nAnswer: Loading...')
+        else:
+            await m.edit(f'Request: {req}\nAnswer: Nothing found!')
 
 commands = [WolframCommand]
 listeners = []

@@ -47,14 +47,16 @@ class Storage:
             self.create_json(json_file)
 
     def load_json(self, json_file):
-        json_file = f'{self.type}/{self.name}/{json_file}'
-        with open(json_file, "r") as read_file:
+        path = f'{self.type}/{self.name}/{json_file}'
+        if not exists(path):
+            self.create_json(json_file)
+        with open(path, "r") as read_file:
             data = json.load(read_file)
         return data
 
     def write_json(self, json_file, data):
-        json_file = f'{self.type}/{self.name}/{json_file}'
-        with open(json_file, "w") as write_file:
+        path = f'{self.type}/{self.name}/{json_file}'
+        with open(path, "w") as write_file:
             json.dump(data, write_file)
 
     def create_json(self, json_file):

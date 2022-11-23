@@ -2,3 +2,6 @@ pyrogram~=2.0.62
 tgcrypto
 wolframalpha~=5.0.0
 schedule
+
+langdetect
+emoji-country-flag

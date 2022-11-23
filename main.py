@@ -2,7 +2,7 @@ import time
 from threading import Thread
 import schedule
 
-from src.core import User
+from user import User
 from pyrogram import idle
 
 

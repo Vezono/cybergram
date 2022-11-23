@@ -19,5 +19,3 @@ class BootModule(BaseCommand):
             client.send_message('me', 'Boot started.')
             client.id = client.get_me().id
             print('ID Injected.')
-
-

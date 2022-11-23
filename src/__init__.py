@@ -13,11 +13,13 @@ from src.commands.dick_command import DickCommand
 from src.commands.doeb_command import DoebCommand
 from src.commands.doeb_cancel_command import DoebCancelCommand
 from src.commands.bncsolve_command import BNCSolveCommand
+from src.commands.lang_stat_command import LangStatCommand
 
 from src.listeners.CheckListener import CheckListener
 from src.listeners.StopVeganListener import StopVeganListener
 from src.listeners.StartVeganListener import StartVeganListener
 from src.listeners.BncListener import BNCListener
+from src.listeners.LangStatListener import LangStatListener
 
 def get_registry(config: dict) -> Registry:
     registry = Registry()
@@ -34,9 +36,11 @@ def get_registry(config: dict) -> Registry:
     registry.register_command(DoebCommand())
     registry.register_command(DoebCancelCommand())
     registry.register_command(BNCSolveCommand())
+    registry.register_command(LangStatCommand())
 
     registry.register_listener(CheckListener())
     registry.register_listener(StopVeganListener())
     registry.register_listener(StartVeganListener())
     registry.register_listener(BNCListener())
+    registry.register_listener(LangStatListener())
     return registry

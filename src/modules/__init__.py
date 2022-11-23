@@ -1,4 +1,4 @@
-from pkgutil import walk_packages
+from pkgutil import iter_modules
 from importlib import import_module
 
 def load_modules(package: str = "src/modules"):
@@ -7,7 +7,7 @@ def load_modules(package: str = "src/modules"):
         Keyword arguments:
         package -- relative path to the package (default "src/commands/common")
     """
-    for _, name, _ in walk_packages([package]):
+    for _, name, _ in iter_modules([package]):
         path = f"{package.replace('/','.')}.{name}"
         print(f'[ModLoader]: Trying to import {name} from {path}')
         module = import_module(f"{package.replace('/','.')}.{name}")

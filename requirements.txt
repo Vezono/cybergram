@@ -6,3 +6,4 @@ langdetect
 emoji-country-flag
 pytz
 toml
+tomli

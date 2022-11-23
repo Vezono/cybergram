@@ -1,7 +1,7 @@
-*.json
 run
 venv
 __pycache__
-*.session*
+
 accounts
+resources
 accounts.txt

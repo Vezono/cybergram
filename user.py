@@ -23,8 +23,13 @@ class User:
         
         self.processor = Processor(self.registry)
 
+        self.inject_id()
         self.initialize_handlers()
         self.initialize_client()
+
+    def inject_id(self):
+        with self.client as client:
+            self.client.id = client.get_me().id
 
     def initialize_client(self):
         self.run()

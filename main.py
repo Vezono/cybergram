@@ -2,8 +2,10 @@ import time
 from threading import Thread
 import schedule
 
-from user import User
 from pyrogram import idle
+
+from src.user import User
+
 
 def some():
     while True:

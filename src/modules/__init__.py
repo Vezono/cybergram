@@ -8,6 +8,8 @@ def load_modules(package: str = "src/modules"):
         package -- relative path to the package (default "src/commands/common")
     """
     for _, name, _ in walk_packages([package]):
+        path = f"{package.replace('/','.')}.{name}"
+        print(f'[ModLoader]: Trying to import {name} from {path}')
         module = import_module(f"{package.replace('/','.')}.{name}")
         try:
             yield module.commands, module.listeners, name

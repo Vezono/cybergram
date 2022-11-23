@@ -1,9 +1,12 @@
 from pyrogram import Client
 from pyrogram import types
 from src.BaseCommand import BaseCommand
-import schedule
+
+import datetime as dt
 
 from src.utils.scheduler_for_async import get_normal_from_async
+
+tz_moscow = dt.timezone(dt.timedelta(hours=-5))
 
 variants = {
     "rat": "🐭Крысиный замок",
@@ -12,19 +15,20 @@ variants = {
     "def": "🛡Защита"
 }
 
-
 class VeganPlanCommand(BaseCommand):
     def __init__(self):
         super().__init__('plan')
         self.last_target = "def"
 
     def load_resources(self, c: Client):
-        schedule.every().day.at("07:58", "Europe/Moscow").do(get_normal_from_async, self.send, c)
-        schedule.every().day.at("15:58", "Europe/Moscow").do(get_normal_from_async, self.send, c)
-        schedule.every().day.at("23:58", "Europe/Moscow").do(get_normal_from_async, self.send, c)
-        schedule.every().day.at("08:03", "Europe/Moscow").do(get_normal_from_async, self.send_after, c)
-        schedule.every().day.at("16:03", "Europe/Moscow").do(get_normal_from_async, self.send_after, c)
-        schedule.every().day.at("00:03", "Europe/Moscow").do(get_normal_from_async, self.send_after, c)
+        schedule = c.user.schedule
+        schedule.daily(dt.time(hour=7, minute=58, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send, c))
+        schedule.daily(dt.time(hour=15, minute=58, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send, c))
+        schedule.daily(dt.time(hour=23, minute=58, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send, c))  
+
+        schedule.daily(dt.time(hour=8, minute=3, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send_after, c))
+        schedule.daily(dt.time(hour=16, minute=3, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send_after, c))
+        schedule.daily(dt.time(hour=0, minute=3, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send_after, c))        
 
     async def execute(self, c: Client, m: types.Message):
         await m.delete()

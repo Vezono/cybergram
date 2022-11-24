@@ -1,3 +1,5 @@
+from src.BaseCommand import BaseCommand
+from src.BaseListener import BaseListener
 
 from src.core import Registry
 from src.modules import load_modules

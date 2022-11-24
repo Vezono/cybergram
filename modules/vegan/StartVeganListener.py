@@ -10,7 +10,6 @@ class StartVeganListener(BaseListener):
         super().__init__()
 
     @decorators.is_text
-    @decorators.from_user
     @decorators.for_id(5505670334)
     async def execute(self, c: Client, m: types.Message):
         if m.text == "🔋Энергия полностью восстановлена, вы готовы к сражению!":

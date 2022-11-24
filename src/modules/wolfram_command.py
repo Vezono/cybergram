@@ -55,11 +55,11 @@ class WolframCommand(BaseCommand):
             await m.delete()
             pic, length  = await self.get_wolfram_text(req)
             img_obj = Image.open(BytesIO(pic))
-            img_obj.save("some.png")
+            img_obj.save("resources/some.png")
             if length > 1200:
-                await c.send_document(m.chat.id, "some.png")
+                await c.send_document(m.chat.id, "resources/some.png")
             else:
-                await c.send_photo(m.chat.id, "some.png")
+                await c.send_photo(m.chat.id, "resources/some.png")
         else:
             req = m.text.replace(".w", "")
             await m.edit(f'Request: {req}\nAnswer: Loading...')

@@ -75,3 +75,21 @@ storage.write_json('fridge.json', {'food': ['apples', 'pizza']})
 user.schedule: scheduler.Scheduler # advised to use for periodical tasks of individual users (in-module usage)
 user.schedule.daily(datetime.time(hour=7, minute=58), wake_up)
 ```
+
+### Decorators
+You can apply decorators to `execute()` method of command or listener.
+```python
+import src.decorators as decorators
+
+class ExampleListener(BaseListener):
+
+    @decorators.is_private
+    async def execute(self, c: pyrogram.Client, m: pyrogram.types.Message):
+        await m.reply('I reply only in private messages!')
+```
+```python
+    @decorators.is_group
+    @decorators.for_id(2405)
+    async def execute(self, c: pyrogram.Client, m: pyrogram.types.Message):
+        await m.reply('I reply only in public chats to user with id 2405!')
+```

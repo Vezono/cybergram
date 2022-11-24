@@ -5,6 +5,7 @@ from pyrogram import types
 from src.BaseCommand import BaseCommand
 from src.utils.bnc_solver import BncSolver
 from src.BaseListener import BaseListener
+import src.decorators as decorators
 
 class BNCSolveCommand(BaseCommand):
     def __init__(self):
@@ -21,22 +22,15 @@ class BNCSolveCommand(BaseCommand):
         c.user.storage.resources['bncsolving'][m.chat.id] = BncSolver(length)
         await m.reply(f'/bnc {length}')
 
-
-
 class BNCListener(BaseListener):
     def __init__(self):
         super().__init__()
 
-    def basic_checks(self, m, c):
-        if not m.from_user or not m.text:
-            return
+    @decorators.is_text
+    @decorators.for_id(586541228)
+    async def execute(self, c: Client, m: types.Message):
         if not c.user.storage.resources.get('bncsolving'):
             c.user.storage.resources['bncsolving'] = {}
-        return (m.from_user.id == 586541228)
-
-    async def execute(self, c: Client, m: types.Message):
-        if not self.basic_checks(m, c):
-            return
         bnc = c.user.storage.resources['bncsolving']
         if not bnc.get(m.chat.id):
             return

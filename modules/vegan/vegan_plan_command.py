@@ -1,6 +1,7 @@
 from pyrogram import Client
 from pyrogram import types
 from src.BaseCommand import BaseCommand
+import src.decorators as decorators
 
 import datetime as dt
 

@@ -1,14 +1,14 @@
 from pyrogram import Client
 from pyrogram import types
 from src.BaseCommand import BaseCommand
-
+import src.decorators as decorators
 
 class SilentUserInfoCommand(BaseCommand):
     def __init__(self):
         super().__init__('user')
 
+    @decorators.silent
     async def execute(self, c: Client, m: types.Message):
-        await m.delete()
         user = m.from_user
         if m.reply_to_message:
             user = m.reply_to_message.from_user

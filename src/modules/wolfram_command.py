@@ -35,7 +35,7 @@ class WolframCommand(BaseCommand):
         vgm_url = 'https://www.wolframalpha.com/input?key=&i=' + req_en
         self.driver.get(vgm_url)
         try:
-            myElem = WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, '_1vuO')))
+            myElem = WebDriverWait(self.driver, 40).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, '_13aP')))
         except TimeoutException:
             print("Loading took too much time!")
         self.driver.execute_script("document.body.innerHTML = document.getElementsByClassName('_1vuO')[0].innerHTML")

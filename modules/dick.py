@@ -4,7 +4,6 @@ from pyrogram import Client
 from pyrogram import types
 from src.BaseCommand import BaseCommand
 
-
 class DickCommand(BaseCommand):
     def __init__(self):
         super().__init__('dick')

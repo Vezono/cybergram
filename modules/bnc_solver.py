@@ -27,6 +27,7 @@ class BNCListener(BaseListener):
         super().__init__()
 
     @decorators.is_text
+    @decorators.from_user
     @decorators.for_id(586541228)
     async def execute(self, c: Client, m: types.Message):
         if not c.user.storage.resources.get('bncsolving'):

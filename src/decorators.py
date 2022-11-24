@@ -1,13 +1,12 @@
 from pyrogram import types, Client
 
 def from_user(func):
-    async def wrapper(self, c: Client, m: types.Message):
+    def wrapper(self, c: Client, m: types.Message):
         if not m.from_user:
             return lambda c, m: 1
-        await func(self, c, m)
+        func(self, c, m)
     return wrapper
 
-@from_user
 def for_me(func):
     async def wrapper(self, c: Client, m: types.Message):
         if c.id != m.from_user.id:
@@ -15,7 +14,6 @@ def for_me(func):
         await func(self, c, m)
     return wrapper
 
-@from_user
 def for_id(user_id):
     def decorator(func):
         async def wrapper(self, c: Client, m: types.Message):
@@ -25,10 +23,10 @@ def for_id(user_id):
         return wrapper
     return decorator
 
-@from_user
 def for_ids(user_ids: list):
     def decorator(func):
         async def wrapper(self, c: Client, m: types.Message):
+            c.react
             if m.from_user.id not in user_ids:
                 return lambda c, m: 1
             await func(self, c, m)

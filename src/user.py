@@ -46,6 +46,11 @@ class User:
         async def command_hub(c: Client, m):
             await self.processor.process_command(c, m)
 
+
+        @self.client.on_message()
+        async def listener_hub(c, m):
+            await self.processor.process_listener(c, m)
+
     def run_schedule(self):
         while True:
             self.schedule.exec_jobs()
@@ -55,7 +60,6 @@ class User:
         self.client.start()
 
     def check_if_command(self, c, u):
-        self.processor.process_listener(c, u)
         if not u.text:
             return False
         

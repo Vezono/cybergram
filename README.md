@@ -21,8 +21,8 @@ disabled = ["apple"] # all modules except "apple" module will be used
 After that, you need to fill out `accounts/<user>/config.json`. Other modules will ask for further configuration in this file along the way.
 ```json
 {
-    "api_id": 813029, 
-    "api_hash": "d0e84cf0acdedf400a2c4956300664d4"
+    "api_id": 1234, 
+    "api_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 }
 ```
 

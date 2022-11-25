@@ -180,6 +180,8 @@ class LangStatCommand(BaseCommand):
         self.client = client
 
     def detect_flag(self, lang):
+        if lang not in codes:
+            return '??'
         return flag.flag(codes[lang])
 
     def render(self):
@@ -216,6 +218,8 @@ class LangStatListener(BaseListener):
         super().__init__()
 
     def detect_flag(self, lang):
+        if lang not in codes:
+            return '??'
         return flag.flag(codes[lang])
 
     async def execute(self, c: Client, m: types.Message):

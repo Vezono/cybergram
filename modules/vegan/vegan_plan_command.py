@@ -42,9 +42,13 @@ class VeganPlanCommand(BaseCommand):
     async def send(self, c: Client):
         await c.send_message(5505670334, variants[self.last_target])
         await c.send_message(5505670334, "/off_goodsleep")
+        await c.send_message(5505670334, "/off_greedy")
         await c.send_message(5505670334, "/use_bicepc")
+        await c.send_message(5505670334, "/use_dvuzhil")
         self.last_target = "def"
 
     async def send_after(self, c: Client):
+        await c.send_message(5505670334, "/off_dvuzhil")
         await c.send_message(5505670334, "/off_bicepc")
+        await c.send_message(5505670334, "/use_greedy")
         await c.send_message(5505670334, "/use_goodsleep")

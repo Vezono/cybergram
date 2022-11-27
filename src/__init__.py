@@ -15,12 +15,10 @@ def get_registry(storage) -> Registry:
 
         if 'enabled' in settings[storage.name]:
             if name not in settings[storage.name]['enabled']:
-                print(f'[Registry]: {storage.name} skipped {name}')
                 continue
 
         if 'disabled' in settings[storage.name]:
             if name in settings[storage.name]['disabled']:
-                print(f'[Registry]: {storage.name} skipped {name}')
                 continue
             
         for command in commands:

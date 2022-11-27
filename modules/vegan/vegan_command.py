@@ -3,12 +3,21 @@ from pyrogram import types
 from src.BaseCommand import BaseCommand
 from src.utils.periodic import Periodic
 
-
+async def farm_message(c):
+    f = c.user.storage.config.get('farm_message')
+    if not f:
+        f = await c.send_message(5505670334, '🗺Квесты')
+        f = f.id+1
+        config = c.user.storage.config
+        config.update({'farm_message': f})
+        c.user.storage.write_json('config.json', config)
+    return f
+    
 async def quest(c: Client):
     try:
         await c.request_callback_answer(
             chat_id=5505670334,
-            message_id=c.user.storage.config['farm_message'],
+            message_id = await farm_message(c),
             callback_data="quest_select?castle_protect",
             timeout=1
         )

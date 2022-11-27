@@ -1,5 +1,5 @@
 from src.core import Storage
-storage = Storage('bnc', 'resources')
+storage = Storage('bnc')
 
 def num_is_legit(num, length):
     if len(num) != length:

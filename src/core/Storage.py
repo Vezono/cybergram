@@ -8,17 +8,13 @@ from src import constants
 
 
 class Storage:
-    def __init__(self, name, type='accounts'):
+    def __init__(self, name):
         self.name = name
         self.type = type
         self.path = f'{self.type}/{self.name}/{self.name}'
         self.initialize_files()
 
         self.resources = {}
-
-        if type=='accounts':
-            self.api_id = self.config['api_id']
-            self.api_hash = self.config['api_hash']
 
     @property
     def config(self):

@@ -3,7 +3,7 @@ import random
 from pyrogram import Client
 from pyrogram import types
 from src.BaseCommand import BaseCommand
-from src.utils.bnc_solver import BncSolver
+from .bnc_solver import BncSolver
 from src.BaseListener import BaseListener
 import src.decorators as decorators
 

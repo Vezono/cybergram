@@ -8,7 +8,7 @@ from src import constants
 
 
 class Storage:
-    def __init__(self, name):
+    def __init__(self, name, type='accounts'):
         self.name = name
         self.type = type
         self.path = f'{self.type}/{self.name}/{self.name}'

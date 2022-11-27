@@ -11,13 +11,13 @@ from src.core import Storage, Processor
 from src import get_registry
 
 class User:
-    def __init__(self, name):
+    def __init__(self, name, api_id, api_hash):
         self.name = name
 
         self.schedule = scheduler.Scheduler(tzinfo=dt.timezone.utc)
 
         self.storage = Storage(name)
-        self.client = Client(self.storage.path, self.storage.api_id, self.storage.api_hash)
+        self.client = Client(self.storage.path, api_id, api_hash)
         self.client.user = self
 
         self.registry = get_registry(self.storage)

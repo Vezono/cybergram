@@ -1,11 +1,15 @@
-# cybergram v0.3.2-beta
+# cybergram v0.4.0-beta
 ## Authors
 Made by *vezono* and *Teacater*
 
 ## Configuration
-First, you need to create `accounts.toml`, which contains list of accounts and their settings.
+First, you need to create `accounts.toml`, which contains api_id and api_hash, list of accounts and their settings.
 ```toml
 # accounts.toml
+[config]
+api_id = 1234
+api_hash = "abcabcabcabc"
+
 [user1]
 name = "user1"
 
@@ -16,6 +20,8 @@ enabled = ["example", "sugar"] # only "example" and "sugar" modules will be used
 [user3]
 name = "user3"
 disabled = ["apple"] # all modules except "apple" module will be used
+api_id = 4444 
+api_hash = "eeeeeeeeeee"  # overlaps data in config section
 ```
 
 After that, you need to fill out `accounts/<user>/config.json`. Other modules will ask for further configuration in this file along the way.

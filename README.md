@@ -24,14 +24,6 @@ api_id = 4444
 api_hash = "eeeeeeeeeee"  # overlaps data in config section
 ```
 
-After that, you need to fill out `accounts/<user>/config.json`. Other modules will ask for further configuration in this file along the way.
-```json
-{
-    "api_id": 1234, 
-    "api_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-}
-```
-
 ## Module creation
 Modules are stored in `modules` directory.
 **Module** can either be single file (`module.py`) or a package (`module/__init__.py`).

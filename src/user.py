@@ -34,6 +34,7 @@ class User:
     def inject_id(self):
         with self.client as client:
             self.client.id = client.get_me().id
+            self.client.username = client.get_me().username
 
     def initialize_sceduler(self):
         Thread(target=self.run_schedule).start()

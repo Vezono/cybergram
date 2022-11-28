@@ -12,6 +12,8 @@ class Session:
         self.players = {}
         self.roles = {_: 0 for _ in roles.values()}
 
+        self.fixed = False
+
     @property
     def usernames(self):
         return[self.players[player].username for player in self.players]

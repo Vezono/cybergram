@@ -32,10 +32,13 @@ class PvePlayerListListener(BaseListener):
             if username not in players:
                 ready = False
                 break
+        if game.fixed:
+            return
         if ready:
             await m.reply('Мы готовы')
         else:
             await m.reply('^join')
+            game.fixed = True
 
 class PveWinListener(BaseListener):
     @decorators.for_id(ragna_id)

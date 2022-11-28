@@ -15,11 +15,9 @@ class PVEPlayer:
 
     def choose(self, buttons):
         choices = self.parse_buttons(buttons)
-        print(f'{self.username}: {choices}\n')
         for choice in self.priority:
             if not choices[choice]:
                 continue
-            print(f'Chose {choice}, while {self.states}!')
             return choices[choice][0]
 
     def parse_buttons(self, buttons: list):

@@ -3,7 +3,7 @@ from pyrogram import types, Client
 def with_arguments(count):
     def decorator(func):
         async def wrapper(self, c: Client, m: types.Message):
-            if m.count(' ') < count:
+            if m.text.count(' ') < count:
                 return lambda c, m: 1
             await func(self, c, m)
         return wrapper

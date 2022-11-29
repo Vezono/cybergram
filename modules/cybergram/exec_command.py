@@ -11,7 +11,8 @@ class ExecCommand(BaseCommand):
         code = m.text.split(' ', 1)[1]
         tts = f'Code:\n{code}'
         try:
-            tts += f'\n\nResult: {exec(code)}'
+            result = exec(code)
+            tts += f'\n\nResult: {result}'
         except:
             tts += f'\n\nError: {traceback.format_exc()}'
         await m.edit(tts)
@@ -25,7 +26,38 @@ class AExecCommand(BaseCommand):
         code = m.text.split(' ', 1)[1]
         tts = f'Code:\n{code}'
         try:
-            tts += f'\n\nResult: {await exec(code)}'
+            result = exec(code)
+            tts += f'\n\nResult: {result}'
+        except:
+            tts += f'\n\nError: {traceback.format_exc()}'
+        await m.edit(tts)
+
+class EvalCommand(BaseCommand):
+    def __init__(self):
+        super().__init__('eval')
+
+    @decorators.with_arguments()
+    async def execute(self, c, m):
+        code = m.text.split(' ', 1)[1]
+        tts = f'Code:\n{code}'
+        try:
+            result = eval(code)
+            tts += f'\n\nResult: {result}'
+        except:
+            tts += f'\n\nError: {traceback.format_exc()}'
+        await m.edit(tts)
+
+class AEvalCommand(BaseCommand):
+    def __init__(self):
+        super().__init__('aeval')
+
+    @decorators.with_arguments()
+    async def execute(self, c, m):
+        code = m.text.split(' ', 1)[1]
+        tts = f'Code:\n{code}'
+        try:
+            result = await eval(code)
+            tts += f'\n\nResult: {result}'
         except:
             tts += f'\n\nError: {traceback.format_exc()}'
         await m.edit(tts)

@@ -2,6 +2,10 @@
 (some of them)
 ### Feel free to delete any of them and add your own.
 
+## `reboot`
+Updates and reboots whole application.
+* Usage: `.reboot`
+
 ## `wolfram`
 Insane module for information requesting. You can ask for anything!
 * `.w weather Kyiv`

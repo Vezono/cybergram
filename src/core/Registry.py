@@ -25,7 +25,7 @@ class Registry:
     def register_command(self, command):
         self.commands.append(command)
         self.registry.update({
-            command.text: command.execute
+            command.text: command
         })
 
     def register_listener(self, listener):
@@ -34,7 +34,7 @@ class Registry:
     async def execute(self, command, c, m):
         if not self.registry.get(command):
             return
-        await self.registry[command](c, m)
+        await self.registry[command].execute(c, m)
 
     async def listen(self, c, m):
         for listener in self.listeners:

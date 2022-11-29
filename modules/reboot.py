@@ -10,8 +10,9 @@ class RebootCommand(BaseCommand):
 
     async def execute(self, c, m):
         update()
-        os.execv(sys.executable, ['python'] + sys.argv)
         await m.edit('Reboot initiated.')
+        os.execv(sys.executable, ['python'] + sys.argv)
+        
 
 commands = [RebootCommand]
 listeners = []

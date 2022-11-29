@@ -1,3 +1,6 @@
+import git
+import pip
+
 def update():
     g = git.cmd.Git('.')
     g.pull()

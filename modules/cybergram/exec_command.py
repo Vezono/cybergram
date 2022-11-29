@@ -8,7 +8,7 @@ class ExecCommand(BaseCommand):
 
     @decorators.with_arguments()
     async def execute(self, c, m):
-        code = m.text.split(' ')[1:]
+        code = m.text.split(' ', 1)[1]
         tts = f'Code:\n{code}'
         try:
             tts += f'\n\nResult: {exec(code)}'
@@ -22,7 +22,7 @@ class AExecCommand(BaseCommand):
 
     @decorators.with_arguments()
     async def execute(self, c, m):
-        code = m.text.split(' ')[1:]
+        code = m.text.split(' ', 1)[1]
         tts = f'Code:\n{code}'
         try:
             tts += f'\n\nResult: {await exec(code)}'

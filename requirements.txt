@@ -1,17 +1,4 @@
 pyrogram~=2.0.62
 tgcrypto
-wolframalpha~=5.0.0
-scheduler
-langdetect
-emoji-country-flag
-pytz
 toml
 tomli
-requests~=2.26.0
-selenium~=4.6.0
-bs4~=0.0.1
-beautifulsoup4~=4.11.1
-Pillow~=9.3.0
-requests_html
-webdriver_manager
-GitPython

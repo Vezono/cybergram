@@ -1,3 +1,6 @@
+from src.utils.update import update
+update()
+
 import time
 from threading import Thread
 import scheduler

@@ -43,13 +43,13 @@ class VeganPlanCommand(BaseCommand):
         await c.send_message(5505670334, variants[self.last_target])
         await c.send_message(5505670334, "/off_goodsleep")
         await c.send_message(5505670334, "/off_greedy")
-        skills = c.user.storage.config['skills']
+        skills = c.user.storage.config['vegan_skills']
         for skill in skills:
             await c.send_message(5505670334, f"/use_{skill}")
         self.last_target = "def"
 
     async def send_after(self, c: Client):
-        skills = c.user.storage.config['skills']
+        skills = c.user.storage.config['vegan_skills']
         for skill in skills:
             await c.send_message(5505670334, f"/off_{skill}")
         await c.send_message(5505670334, "/use_greedy")

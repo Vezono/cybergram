@@ -4,7 +4,7 @@ import traceback
 
 class ExecCommand(BaseCommand):
     def __init__(self):
-        super().__init__('reboot')
+        super().__init__('exec')
 
     @decorators.with_arguments()
     async def execute(self, c, m):

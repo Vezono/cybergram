@@ -10,9 +10,7 @@ class RebootCommand(BaseCommand):
         super().__init__('reboot')
 
     async def execute(self, c, m):
-        g = git.cmd.Git('.')
-        g.pull()
-        pip.main(['install', '-r', 'requirements.txt'])
+        
         os.execv(sys.executable, ['python'] + sys.argv)
 
 commands = [RebootCommand]

@@ -1,6 +1,6 @@
 from pyrogram import types, Client
 
-def with_arguments(count):
+def with_arguments(count=1):
     def decorator(func):
         async def wrapper(self, c: Client, m: types.Message):
             if m.text.count(' ') < count:

@@ -10,6 +10,3 @@ class ScheduleCommand(BaseCommand):
 
     async def execute(self, c: Client, m: types.Message):
         await m.edit(f'```{c.user.schedule}```')
-
-commands = [ScheduleCommand]
-listeners = []

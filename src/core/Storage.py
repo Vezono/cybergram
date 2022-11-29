@@ -19,6 +19,11 @@ class Storage:
     @property
     def config(self):
         return self.load_json('config.json')
+    
+    def update_config(self, data):
+        config = self.config
+        config.update(data)
+        self.write_json('config.json', config)
 
     def exists(self, file):
         return exists(f'{self.type}/{self.name}/{file}')

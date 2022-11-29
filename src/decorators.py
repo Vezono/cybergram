@@ -1,5 +1,14 @@
 from pyrogram import types, Client
 
+def with_arguments(count):
+    def decorator(func):
+        async def wrapper(self, c: Client, m: types.Message):
+            if m.count(' ') < count:
+                return lambda c, m: 1
+            await func(self, c, m)
+        return wrapper
+    return decorator
+
 def for_me(func):
     async def wrapper(self, c: Client, m: types.Message):
         if not m.from_user:

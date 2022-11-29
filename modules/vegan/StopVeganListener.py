@@ -7,9 +7,6 @@ from .vegan_command import VeganCommand
 
 class StopVeganListener(BaseListener):
 
-    def __init__(self):
-        super().__init__()
-
     @decorators.is_text
     @decorators.for_id(5505670334)
     async def execute(self, c: Client, m: types.Message):

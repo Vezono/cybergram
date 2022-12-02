@@ -7,6 +7,8 @@ from .constants import *
 from src import decorators
 from .utils import *
 
+from pyrogram import Client
+
 class RagnaGoCommand(BaseCommand):
     def __init__(self):
         super().__init__('ragnago')
@@ -50,6 +52,14 @@ class PveWinListener(BaseListener):
             return
         storage.games.update({m.chat.id: Session(m.chat.id)})
         await m.reply('рагна вставай')
+
+class ChatJoinListener(BaseListener):
+    @decorators.for_id(storage.config['leader'])
+    @decorators.with_arguments(1)
+    async def execute(self, c: Client, m):
+        if m.text.split(' ')[0] != '^join':
+            return
+        c.join_chat(m.text.split()[1])
 
 class PveJoinListener(BaseListener):
     @decorators.for_id(storage.config['leader'])

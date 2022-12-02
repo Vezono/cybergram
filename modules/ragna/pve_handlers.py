@@ -59,7 +59,7 @@ class ChatJoinListener(BaseListener):
     async def execute(self, c: Client, m):
         if m.text.split(' ')[0] != '^join':
             return
-        c.join_chat(m.text.split()[1])
+        await c.join_chat(m.text.split()[1])
 
 class PveJoinListener(BaseListener):
     @decorators.for_id(storage.config['leader'])

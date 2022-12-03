@@ -1,5 +1,13 @@
-from ..constants import roles, pve_classes, states
+from ..constants import roles, states
 from ..storage import storage
+
+from .pve.classes import DD, Heal, Tank
+
+pve_classes = {
+    'дд': DD,
+    'хил': Heal,
+    'танк': Tank
+}
 
 class Session:
     def __init__(self, chat_id):

@@ -1,4 +1,4 @@
-from ..constants import roles, pve_classes
+from ..constants import roles, pve_classes, states
 from ..storage import storage
 
 class Session:

@@ -23,7 +23,9 @@ states = {
     '😡': 'fired',
     '☠️': 'deathed',
     '🌀': 'otrek',
-    '👁': 'watched'
+    '👁': 'watched',
+
+    '🔥': 'untanked'
 }
 
 ragna_id = 512187187

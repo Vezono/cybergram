@@ -55,6 +55,9 @@ class PVEPlayer:
             for misc in hl_misc:
                 if misc in btext:
                     choices['role'].append(button)
+            for beam in beams:
+                if beam in btext:
+                    choices['beams'].append(button)
         return choices
 
     def parse_turn(self, turn_log: str):

@@ -65,5 +65,5 @@ class PVEPlayer:
         self.priority = priorities.NORMAL
         if 'otrek' in self.states:
             self.priority = priorities.OTREK
-        elif 'baffed' in self.states:
+        elif 'baffed' not in self.states:
             self.priority = priorities.UNBUFFED

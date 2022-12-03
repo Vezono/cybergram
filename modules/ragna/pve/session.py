@@ -1,7 +1,7 @@
 from ..constants import roles, states
 from ..storage import storage
 
-from .pve.classes import DD, Heal, Tank
+from .classes import DD, Heal, Tank
 
 pve_classes = {
     'дд': DD,

@@ -1,7 +1,15 @@
+from .pve.classes import DD, Heal, Tank
+
 hearts = ['❤️', '🖤', '🤎', '💜']
 roles = {'⚔️': 'дд', 
          '🛡': 'танк',
          '🔮': 'хил'}
+
+pve_classes = {
+    'дд': DD,
+    'хил': Heal,
+    'танк': Tank
+}
 
 subroles_emojies = ['⛩']
 

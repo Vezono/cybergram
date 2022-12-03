@@ -44,6 +44,8 @@ class PVEPlayer:
                 choices['minions'].append(button)
             elif p1 in deathpunch_list and is_username(p2):
                 choices['deathsave'].append(button)
+            elif p1 in wakeup and is_username(p2):
+                choices['wakeup'].append(button)
             elif button in flame_list:
                 choices['puddle'].append(button)
             elif 'в ответ' in button.lower():

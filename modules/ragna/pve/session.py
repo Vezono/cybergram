@@ -1,5 +1,4 @@
-from .classes.player import PVEPlayer
-from ..constants import roles
+from ..constants import roles, pve_classes
 from ..storage import storage
 
 class Session:
@@ -26,7 +25,7 @@ class Session:
             role = min(self.roles, key=self.roles.get)
         if c.id not in self.players:
             self.roles[role] += 1
-            self.players.update({c.id: PVEPlayer(c.username, self, role)})
+            self.players.update({c.id: pve_classes[role](c.username, self)})
         else:
             role = self.players[c.id].role
         return role

@@ -11,7 +11,7 @@ class Session:
 
         self.players = {}
         self.roles = {_: 0 for _ in roles.values()}
-        self.warsong = {_: 0 for _ in storage['warsong'].split()}
+        self.warsong = {_: 0 for _ in storage.config['warsong'].split()}
 
         self.fixed = False
 

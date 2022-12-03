@@ -1,7 +1,9 @@
 from ...constants import *
 from ...utils import *
+from .. import priorities
+
 class PVEPlayer:
-    def __init__(self, username, session, role):
+    def __init__(self, username, session, role, client):
         self.hp = 100
         self.username = username
 
@@ -9,7 +11,7 @@ class PVEPlayer:
         self.subrole = ''
 
         self.states = set()
-        self.priority = ['deathsave', 'platform', 'concentrate', 'wakeup', 'puddle', 'role', 'subrole', 'in_answer', 'minions', 'jokes']
+        self.priority = priorities.NORMAL
 
         self.session = session
 
@@ -36,6 +38,8 @@ class PVEPlayer:
                 choices['concentrate'].append(button)
             elif btext in monk_list:
                 choices['subrole'].append(button)
+            elif btext in stand_still:
+                choices['standstill'].append(button)
             elif p1 in minions_p1 and p2 in minions_p2:
                 choices['minions'].append(button)
             elif p1 in deathpunch_list and is_username(p2):
@@ -58,6 +62,6 @@ class PVEPlayer:
                 self.states.add(states[state])
             elif states[state] in self.states:
                 self.states.remove(states[state])
-        self.priority = ['deathsave', 'platform', 'concentrate', 'wakeup', 'role', 'puddle', 'subrole', 'in_answer', 'minions', 'jokes']
+        self.priority = priorities.NORMAL
         if 'otrek' in self.states:
-            self.priority = ['deathsave', 'platform', 'concentrate', 'wakeup', 'puddle', 'subrole', 'in_answer', 'minions', 'jokes', 'role']
+            self.priority = priorities.OTREK

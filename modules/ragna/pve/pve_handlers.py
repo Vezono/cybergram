@@ -1,11 +1,12 @@
 from src.BaseCommand import BaseCommand
 from src.BaseListener import BaseListener
 
-from .pve.session import Session
-from .storage import storage
-from .constants import *
+from .session import Session
+from ..storage import storage
+from ..constants import *
 from src import decorators
-from .utils import *
+from ..utils import *
+from .. import rdecorators
 
 from pyrogram import Client
 
@@ -44,6 +45,7 @@ class PvePlayerListListener(BaseListener):
 
 class PveWinListener(BaseListener):
     @decorators.for_id(ragna_id)
+    @rdecorators.for_leader
     @decorators.is_text
     async def execute(self, c, m):
         if m.chat.id not in storage.games:
@@ -72,6 +74,16 @@ class PveJoinListener(BaseListener):
         role = storage.games[m.chat.id].join(c)
         await m.reply('я тест')
         await m.reply(f'я {role}')
+
+class DoWarsongListener(BaseListener):
+    @decorators.for_id(storage.config['leader'])
+    @decorators.is_text
+    async def execute(self, c, m):
+        if m.chat.id not in storage.games:
+            return
+        if m.text != '^warsong':
+            return
+        await m.reply(storage.games[m.chat.id].warsong())
 
 class PveStartListener(BaseListener):
     @decorators.for_id(ragna_id)

@@ -11,6 +11,7 @@ class Session:
 
         self.players = {}
         self.roles = {_: 0 for _ in roles.values()}
+        self.warsong = {_: 0 for _ in storage['warsong'].split()}
 
         self.fixed = False
 
@@ -29,3 +30,8 @@ class Session:
         else:
             role = self.players[c.id].role
         return role
+
+    def warsong(self):
+        song = min(self.warsong, key=self.warsong.get)
+        self.warsong[song] += 1
+        return song

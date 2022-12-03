@@ -3,7 +3,7 @@ from ...utils import *
 from .. import priorities
 
 class PVEPlayer:
-    def __init__(self, username, session, role, client):
+    def __init__(self, username, session, role):
         self.hp = 100
         self.username = username
 

@@ -31,7 +31,7 @@ class Session:
             role = self.players[c.id].role
         return role
 
-    def warsong(self):
+    def get_warsong(self):
         song = min(self.warsong, key=self.warsong.get)
         self.warsong[song] += 1
         return song

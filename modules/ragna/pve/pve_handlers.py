@@ -83,7 +83,7 @@ class DoWarsongListener(BaseListener):
             return
         if m.text != '^warsong':
             return
-        await m.reply(storage.games[m.chat.id].warsong())
+        await m.reply(storage.games[m.chat.id].get_warsong())
 
 class PveStartListener(BaseListener):
     @decorators.for_id(ragna_id)

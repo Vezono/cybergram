@@ -9,6 +9,5 @@ class RebootCommand(BaseCommand):
         super().__init__('reboot')
 
     async def execute(self, c, m):
-        update()
         await m.edit('Reboot initiated.')
         os.execv(sys.executable, ['python'] + sys.argv)

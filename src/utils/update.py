@@ -11,5 +11,3 @@ def update():
     modules = [f.path for f in os.scandir('modules') if f.is_dir()]
     for module in modules:
         pip.main(['install', '-r', f'{module}/requirements.txt'])
-
-update()

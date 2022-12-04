@@ -4,8 +4,7 @@ from src.BaseCommand import BaseCommand
 import src.decorators as decorators
 
 class SilentUserInfoCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('user')
+    text = 'user'
 
     @decorators.silent
     async def execute(self, c: Client, m: types.Message):

@@ -22,8 +22,9 @@ from PIL import Image
 from io import BytesIO
 
 class WolframCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('w')
+    text = 'w'
+
+    def on_start(self):
         self.wclient = None
         options = webdriver.ChromeOptions()
         options.add_argument('headless')

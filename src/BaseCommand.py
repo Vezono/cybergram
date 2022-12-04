@@ -3,8 +3,9 @@ from pyrogram import types
 import asyncio
 
 class BaseCommand:
-    def __init__(self, text="basic"):
-        self.text = text
+    def __init__(self, text=None):
+        if text:
+            self.text = text
         self.on_start()
 
     def on_start(self):

@@ -170,8 +170,7 @@ codes = {
 
 
 class LangStatCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('langstat')
+    text = 'langstat'
 
     async def execute(self, c: Client, m: types.Message):
         await m.edit(self.render())
@@ -213,9 +212,6 @@ class LangStatCommand(BaseCommand):
         return tts
 
 class LangStatListener(BaseListener):
-
-    def __init__(self):
-        super().__init__()
 
     def detect_flag(self, lang):
         if lang not in codes:

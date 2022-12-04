@@ -8,8 +8,7 @@ from src.BaseListener import BaseListener
 import src.decorators as decorators
 
 class BNCSolveCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('bncsolve')
+    text = 'bncsolve'
 
     async def execute(self, c: Client, m: types.Message):
         await m.delete()

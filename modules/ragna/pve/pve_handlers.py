@@ -11,8 +11,7 @@ from .. import rdecorators
 from pyrogram import Client
 
 class RagnaGoCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('ragnago')
+    text = 'ragnago'
 
     async def execute(self, c, m):
         storage.games.update({m.chat.id: Session(m.chat.id)})

@@ -5,8 +5,7 @@ import sys
 from src.utils.update import update
 
 class RebootCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('reboot')
+    text = 'reboot'
 
     async def execute(self, c, m):
         await m.edit('Reboot initiated.')

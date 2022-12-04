@@ -5,8 +5,7 @@ from src.BaseCommand import BaseCommand
 
 
 class ScheduleCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('schedule')
+    text = 'schedule'
 
     async def execute(self, c: Client, m: types.Message):
         await m.edit(f'```{c.user.schedule}```')

@@ -5,8 +5,7 @@ from pyrogram import types
 from src.BaseCommand import BaseCommand
 
 class DickCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('dick')
+    text = 'dick'
 
     async def execute(self, c: Client, m: types.Message):
         size = random.randint(1, 34)

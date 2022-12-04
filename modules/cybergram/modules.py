@@ -9,8 +9,7 @@ from modules import modules_list
 
 
 class ModulesCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('modules')
+    text = 'modules'
 
     async def execute(self, c: Client, m: types.Message):
         tts = "**Modules: **\n"
@@ -19,8 +18,7 @@ class ModulesCommand(BaseCommand):
         await m.edit(tts)
 
 class ModuleCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('module')
+    text = 'module'
 
     @decorators.with_arguments(1)
     async def execute(self, c: Client, m: types.Message):
@@ -38,8 +36,7 @@ class ModuleCommand(BaseCommand):
         await m.edit(tts)
 
 class UnloadModuleCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('unload')
+    text = 'unload'
 
     @decorators.with_arguments(1)
     async def execute(self, c: Client, m: types.Message):
@@ -50,8 +47,7 @@ class UnloadModuleCommand(BaseCommand):
         await m.edit(f'```[ModLoader]: 🔴"{name}" unloaded.```')
 
 class LoadModuleCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('load')
+    text = 'load'
 
     @decorators.with_arguments(1)
     async def execute(self, c: Client, m: types.Message):

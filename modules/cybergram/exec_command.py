@@ -3,8 +3,7 @@ from src import decorators
 import traceback
 
 class ExecCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('exec')
+    text = 'exec'
 
     @decorators.with_arguments()
     async def execute(self, c, m):
@@ -18,8 +17,7 @@ class ExecCommand(BaseCommand):
         await m.edit(tts)
 
 class AExecCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('aexec')
+    text = 'aexec'
 
     @decorators.with_arguments()
     async def execute(self, c, m):
@@ -33,8 +31,7 @@ class AExecCommand(BaseCommand):
         await m.edit(tts)
 
 class EvalCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('eval')
+    text = 'eval'
 
     @decorators.with_arguments()
     async def execute(self, c, m):
@@ -48,8 +45,7 @@ class EvalCommand(BaseCommand):
         await m.edit(tts)
 
 class AEvalCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('aeval')
+    text = 'aeval'
 
     @decorators.with_arguments()
     async def execute(self, c, m):

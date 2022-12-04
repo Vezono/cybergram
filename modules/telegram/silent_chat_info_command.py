@@ -4,8 +4,7 @@ from src.BaseCommand import BaseCommand
 
 
 class SilentChatInfoCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('chat')
+    text = 'chat'
 
     async def execute(self, c: Client, m: types.Message):
         await m.delete()

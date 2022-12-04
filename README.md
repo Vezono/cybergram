@@ -34,8 +34,7 @@ A module consists of **commands** and **listeners**. While commands only used fo
 from src import BaseCommand
 
 class ExampleCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('example') # bot will respond to ".example" command
+    text = 'example' # bot will respond to ".example" command
 
     async def execute(self, c: pyrogram.Client, m: pyrogram.types.Message):
         await m.reply('This is an example command!')

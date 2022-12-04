@@ -4,8 +4,7 @@ from src.BaseCommand import BaseCommand
 
 
 class MessageInfoCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('info')
+    text = 'info'
 
     async def execute(self, c: Client, m: types.Message):
         await c.send_message("me", f"{m.reply_to_message.id} {m.reply_to_message.reply_markup}")

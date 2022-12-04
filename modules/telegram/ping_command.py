@@ -4,8 +4,7 @@ from src.BaseCommand import BaseCommand
 
 
 class PingCommand(BaseCommand):
-    def __init__(self):
-        super().__init__('ping')
+    text = 'ping'
 
     async def execute(self, c: Client, m: types.Message):
         await m.reply('Working.')

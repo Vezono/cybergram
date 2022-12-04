@@ -21,11 +21,9 @@ class Registry:
 
     @property
     def commands(self):
-        commands = {}
         for module in self.modules.values():
             for command in module.commands:
-                commands.update({command.text: command})
-        return commands
+                yield command
 
     def get_settings(self):
         with open("accounts.toml", mode="rb") as fp:
@@ -59,19 +57,19 @@ class Registry:
     def load_resources(self, client):
         for i in self.listeners:
             i.load_resources(client)
-        for i in self.commands.values():
+        for i in self.commands:
             i.load_resources(client)
 
     def inject_client(self, client):
         for i in self.listeners:
             i.client = client
-        for i in self.commands.values():
+        for i in self.commands:
             i.client = client
 
-    async def execute(self, command, c, m):
-        if not self.commands.get(command):
-            return
-        await self.commands[command].execute(c, m)
+    async def execute(self, text, c, m):
+        for command in self.commands:
+            if command.text == text:
+                await command.execute(c, m)
 
     async def listen(self, c, m):
         for listener in self.listeners:

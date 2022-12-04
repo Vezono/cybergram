@@ -1,2 +1,4 @@
+from .translate import TranslateToCommand
+
 commands = []
-listeners = []
+listeners = [TranslateToCommand]

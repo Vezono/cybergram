@@ -17,6 +17,9 @@ class TranslateToCommand(BaseListener):
             text = m.text.split(' ', 1)[1]
             command = m.text.split(' ', 1)[0]
 
+        if not text:
+            return
+
         from_lang, to_lang = parse_translate_command(command)
         translation = translate_text(from_lang, to_lang, text)
         await m.edit(translation)

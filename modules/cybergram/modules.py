@@ -47,7 +47,7 @@ class UnloadModuleCommand(BaseCommand):
         if name not in c.user.registry.modules:
             await m.edit(f'```[ModLoader]: "{name}" module is not loaded.```')
         c.user.registry.unload_module(name)
-        await m.edit(f'```[ModLoader]: "{name}" unloaded.```')
+        await m.edit(f'```[ModLoader]: 🔴"{name}" unloaded.```')
 
 class LoadModuleCommand(BaseCommand):
     def __init__(self):
@@ -61,4 +61,4 @@ class LoadModuleCommand(BaseCommand):
         if name in c.user.registry.modules:
             await m.edit(f'[ModLoader]: "{name}" module is already loaded.')
         c.user.registry.load_module(name)
-        await m.edit(f'[ModLoader]: "{name}" loaded.')
+        await m.edit(f'[ModLoader]: 🟢"{name}" loaded.')

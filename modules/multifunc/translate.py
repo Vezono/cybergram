@@ -4,6 +4,7 @@ from src import decorators
 
 class TranslateToCommand(BaseListener):
 
+    @decorators.for_me
     async def execute(self, c, m):
         try:
             await self.translate(c, m)

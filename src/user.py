@@ -42,13 +42,10 @@ class User:
         self.run()
 
     def initialize_handlers(self):
-        @self.client.on_message(filters.create(self.check_if_command, "userbot_command"))
-        async def command_hub(c: Client, m):
-            await self.processor.process_command(c, m)
-
-
         @self.client.on_message()
         async def listener_hub(c, m):
+            if self.check_if_command(c, m):
+                await self.processor.process_command(c, m)
             await self.processor.process_listener(c, m)
 
     def run_schedule(self):

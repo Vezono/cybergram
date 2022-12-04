@@ -4,8 +4,13 @@ from src import decorators
 
 class TranslateToCommand(BaseListener):
 
-    @decorators.is_text
     async def execute(self, c, m):
+        try:
+            await self.translate(c, m)
+        except:
+            await m.edit('Error happened.')
+
+    async def translate(self, c, m):
         if not m.text.startswith('.t'):
             return
         text = ''
@@ -21,5 +26,6 @@ class TranslateToCommand(BaseListener):
             return
 
         from_lang, to_lang = parse_translate_command(command)
+        await m.edit('Translating...')
         translation = translate_text(from_lang, to_lang, text)
         await m.edit(translation)

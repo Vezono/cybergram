@@ -20,7 +20,7 @@ class BaseCommand:
     def load_resources(self, *args, **kwargs):
         pass
 
-    def get_normal_from_async(function, *args, **kwargs):
-        asyncio.run(function(*args, **kwargs))
+    def on_stop(self):
+        pass
 
 

@@ -1,40 +1,77 @@
 from typing import List
+import tomli
 
 from src.BaseCommand import BaseCommand
 from src.BaseListener import BaseListener
-
+from src.core import Storage, Module
+from modules import load_modules, get_module
 
 class Registry:
-    def __init__(self):
-        self.registry = {}
-        self.listeners: List[BaseListener] = []
-        self.commands: List[BaseCommand] = []
+    def __init__(self, storage: Storage):
+        self.storage = storage
+
+        self.modules = {}
+        self.initialize_modules()
+
+    @property
+    def listeners(self):
+        for module in self.modules.values():
+            for listener in module.listeners:
+                yield listener
+
+    @property
+    def commands(self):
+        commands = {}
+        for module in self.modules.values():
+            for command in module.commands:
+                commands.update({command.text: command})
+        return commands
+
+    def get_settings(self):
+        with open("accounts.toml", mode="rb") as fp:
+            return tomli.load(fp)
+
+    def load_module(self, module: str):
+        commands, listeners, name = get_module(module)
+        self.modules.update({name: Module(name, commands, listeners)})
+        print(f'[Registry]: {self.storage.name} has loaded {name}')
+    
+    def unload_module(self, module: str):
+        del self.modules[module]
+
+    def initialize_modules(self):
+        settings = self.get_settings()
+        for module in load_modules():
+            commands, listeners, name = module
+
+            if 'enabled' in settings[self.storage.name]:
+                if name not in settings[self.storage.name]['enabled']:
+                    continue
+
+            if 'disabled' in settings[self.storage.name]:
+                if name in settings[self.storage.name]['disabled']:
+                    continue
+
+            self.modules.update({name: Module(name, commands, listeners)})
+            print(f'[Registry]: {self.storage.name} has loaded {name}')
+        return self
 
     def load_resources(self, client):
         for i in self.listeners:
             i.load_resources(client)
-        for i in self.commands:
+        for i in self.commands.values():
             i.load_resources(client)
 
     def inject_client(self, client):
         for i in self.listeners:
             i.client = client
-        for i in self.commands:
+        for i in self.commands.values():
             i.client = client
 
-    def register_command(self, command):
-        self.commands.append(command)
-        self.registry.update({
-            command.text: command
-        })
-
-    def register_listener(self, listener):
-        self.listeners.append(listener)
-
     async def execute(self, command, c, m):
-        if not self.registry.get(command):
+        if not self.commands.get(command):
             return
-        await self.registry[command].execute(c, m)
+        await self.commands[command].execute(c, m)
 
     async def listen(self, c, m):
         for listener in self.listeners:

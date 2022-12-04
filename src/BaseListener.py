@@ -14,3 +14,6 @@ class BaseListener:
 
     def load_resources(self, *args, **kwargs):
         pass
+
+    def on_stop(self):
+        pass

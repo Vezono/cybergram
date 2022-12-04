@@ -7,8 +7,7 @@ from threading import Thread
 import asyncio
 import time
 
-from src.core import Storage, Processor
-from src import get_registry
+from src.core import Storage, Processor, Registry
 
 class User:
     def __init__(self, name, api_id, api_hash):
@@ -20,7 +19,7 @@ class User:
         self.client = Client(self.storage.path, api_id, api_hash)
         self.client.user = self
 
-        self.registry = get_registry(self.storage)
+        self.registry = Registry(self.storage)
         self.registry.load_resources(self.client)
         self.registry.inject_client(self.client)
         

@@ -1,4 +1,4 @@
-# cybergram v0.5.0-beta
+# cybergram v0.6.0-beta
 ## Authors
 Made by *vezono* and *Teacater*
 

@@ -32,6 +32,8 @@ class User:
         self.initialize_handlers()
         self.initialize_client()
 
+        self.registry.ready()
+
     def inject_id(self):
         with self.client as client:
             self.client.id = client.get_me().id

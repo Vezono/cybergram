@@ -72,6 +72,12 @@ class Registry:
         for i in self.commands:
             i.client = client
 
+    def ready(self):
+        for i in self.listeners:
+            i.ready()
+        for i in self.commands:
+            i.ready()
+
     async def execute(self, text, c, m):
         for command in self.commands:
             if command.text == text:

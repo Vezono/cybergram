@@ -3,10 +3,6 @@ from .bot import BotGui
 from .storage import storage
 from traceback import format_exc
 
-if storage.config.get('token'):
-    storage.gui = BotGui(storage.config.get('token'))
-    storage.gui.run()
-
 class BotGuiCommand(BaseCommand):
     text = "gui"
 
@@ -30,6 +26,11 @@ class BotGuiCommand(BaseCommand):
         storage.gui.run()
         await c.send_message(bot_username, '/start')
         await m.edit('Configuration succsessful.')
+
+    def ready(self):
+        if storage.config.get('token'):
+            storage.gui = BotGui(storage.config.get('token'))
+            storage.gui.run()
         
 
 commands = [BotGuiCommand]

@@ -21,6 +21,9 @@ class BaseCommand:
     def load_resources(self, *args, **kwargs):
         pass
 
+    def ready(self):
+        pass
+
     def on_stop(self):
         pass
 

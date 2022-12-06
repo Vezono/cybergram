@@ -7,7 +7,7 @@ from .utils import divide_by_rows
 class BotGui:
     def __init__(self, token):
         self.token: str = token
-        self.bot = TeleBot(token)
+        self.bot: TeleBot = TeleBot(token)
 
         self.initialize_handlers()
 
@@ -45,7 +45,6 @@ class BotGui:
         @self.bot.callback_query_handler(func=lambda c: c.data.startswith('m?'))
         def m(c):
             user = cybergram.get_user(c.from_user.id)
-            print(f'{c.from_user.id} in {cybergram.user_ids}' if not user else 'ok')
             module = c.data.split('?')[1]
             user.registry.switch_module(module)
 
@@ -59,6 +58,16 @@ class BotGui:
             for row in buttons:
                 kb.add(*row)
             bot.edit_message_text(tts, chat_id=c.message.chat.id, message_id=c.message.message_id, parse_mode='Markdown', reply_markup=kb)
+
+        @self.bot.inline_handler(func=self.validator)
+        def qe(q):
+            user = cybergram.get_user(q.from_user.id)
+            results = []
+            for module in user.registry.modules.values():
+                for command in module.commands:
+                    text = f".{command.text}" if not q.query else f".{command.text} {q.query}"
+                    results.append(types.InlineQueryResultArticle(command.text, f"{module.name} - .{command.text}", types.InputTextMessageContent(text)))
+            self.bot.answer_inline_query(q.id, results)
 
     def run(self):
         self.thread = Thread(target=self.bot.infinity_polling)

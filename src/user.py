@@ -25,7 +25,9 @@ class User:
         
         self.processor = Processor(self.registry)
 
-        self.inject_id()
+        self.active = True
+
+        self.id = self.inject_id()
         self.initialize_sceduler()
         self.initialize_handlers()
         self.initialize_client()
@@ -34,6 +36,7 @@ class User:
         with self.client as client:
             self.client.id = client.get_me().id
             self.client.username = client.get_me().username
+            return self.client.id
 
     def initialize_sceduler(self):
         Thread(target=self.run_schedule).start()
@@ -44,12 +47,16 @@ class User:
     def initialize_handlers(self):
         @self.client.on_message()
         async def listener_hub(c, m):
+            if not self.active:
+                return
             if self.check_if_command(c, m):
                 await self.processor.process_command(c, m)
             await self.processor.process_listener(c, m)
 
     def run_schedule(self):
         while True:
+            if not self.active:
+                continue
             self.schedule.exec_jobs()
             time.sleep(1)
 

@@ -12,7 +12,7 @@ class Cybergram:
 
     @property
     def user_ids(self):
-        return [user.client.id for user in self.users]
+        return [user.id for user in self.users]
 
     def run(self):
         for account in accounts:
@@ -25,7 +25,7 @@ class Cybergram:
 
     def get_user(self, user_id):
         for user in self.users:
-            if user.client.id == user_id:
+            if user.id == user_id:
                 return user
 
 cybergram = Cybergram()

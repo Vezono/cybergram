@@ -37,6 +37,12 @@ class Registry:
     def unload_module(self, module: str):
         del self.modules[module]
 
+    def switch_module(self, module: str):
+        if module in self.modules:
+            self.unload_module(module)
+        else:
+            self.load_module(module)
+
     def initialize_modules(self):
         settings = self.get_settings()
         for module in load_modules():

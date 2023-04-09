@@ -8,9 +8,9 @@ from modules import load_modules, get_module
 
 class Registry:
     def __init__(self, storage: Storage):
-        self.storage = storage
+        self.storage: Storage = storage
 
-        self.modules = {}
+        self.modules: dict = dict()
         self.initialize_modules()
 
     @property

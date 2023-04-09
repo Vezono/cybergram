@@ -7,7 +7,7 @@ import datetime as dt
 
 from src.utils.scheduler_for_async import get_normal_from_async
 
-tz_moscow = dt.timezone(dt.timedelta(hours=-5))
+tz_moscow = dt.timezone(dt.timedelta(hours=-7))
 
 variants = {
     "rat": "🐭Крысиный замок",

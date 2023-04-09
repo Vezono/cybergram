@@ -16,7 +16,7 @@ class BaseCommand:
 
     async def execute(self, c: Client, m: types.Message):
         await self.notice(c)
-        await c.send_message('me', 'Basic command executed. Check your code btw')
+        await c.send_message('me', 'Basic command executed.')
 
     def load_resources(self, *args, **kwargs):
         pass

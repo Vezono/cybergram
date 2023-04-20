@@ -16,6 +16,9 @@ class VAInfoCommand(BaseCommand):
             for command in vegan.commands:
                 if command.text == 'vinfo':
                     break
-            result = await command.execute(user.client)
-            await c.send_message(m.chat.id, result)
+            try:
+                result = await command.execute(user.client)
+                await c.send_message(m.chat.id, result)
+            except:
+                print(f'[vegan] {user.name} can\'t execute .vinfo command.')
 

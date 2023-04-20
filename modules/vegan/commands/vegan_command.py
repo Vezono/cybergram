@@ -3,6 +3,7 @@ from pyrogram import types
 from src.BaseCommand import BaseCommand
 from src.utils.periodic import Periodic
 
+
 async def farm_message(c):
     f = c.user.storage.config.get('farm_message')
     if not f:
@@ -12,9 +13,12 @@ async def farm_message(c):
         config.update({'farm_message': f})
         c.user.storage.write_json('config.json', config)
     return f
-    
+
+
 async def quest(c: Client):
     try:
+        if not c.user.storage.config.get('vegan_farm'):
+            return
         await c.request_callback_answer(
             chat_id=5505670334,
             message_id = await farm_message(c),
@@ -39,5 +43,6 @@ class VeganCommand(BaseCommand):
 
     async def execute(self, c: Client, m: types.Message):
         await m.delete()
+        c.user.storage.update_config({'vegan_farm': True})
         await q_start(c)
 

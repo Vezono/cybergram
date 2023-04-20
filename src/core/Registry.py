@@ -15,13 +15,13 @@ class Registry:
 
     @property
     def listeners(self):
-        for module in self.modules.values():
+        for module in self.modules.copy().values():
             for listener in module.listeners:
                 yield listener
 
     @property
     def commands(self):
-        for module in self.modules.values():
+        for module in self.modules.copy().values():
             for command in module.commands:
                 yield command
 

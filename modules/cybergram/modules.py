@@ -7,7 +7,6 @@ from src import decorators
 from modules import modules_list
 
 
-
 class ModulesCommand(BaseCommand):
     text = 'modules'
 
@@ -17,6 +16,7 @@ class ModulesCommand(BaseCommand):
             tts += f'{"🟢" if module in c.user.registry.modules else "🔴"}`{module}`\n'
         await m.edit(tts)
 
+
 class ModuleCommand(BaseCommand):
     text = 'module'
 
@@ -24,7 +24,9 @@ class ModuleCommand(BaseCommand):
     async def execute(self, c: Client, m: types.Message):
         name = m.text.split(' ', 1)[1]
         if name not in c.user.registry.modules:
+            print(f'```[ModLoader]: "{name}" module is not loaded.```')
             await m.edit(f'```[ModLoader]: "{name}" module is not loaded.```')
+            return
         module = c.user.registry.modules[name]
         tts = f'**Module {name}: **\n\nCommands:\n'
         for command in module.texts:
@@ -43,6 +45,7 @@ class UnloadModuleCommand(BaseCommand):
         name = m.text.split(' ', 1)[1]
         if name not in c.user.registry.modules:
             await m.edit(f'```[ModLoader]: "{name}" module is not loaded.```')
+            return
         c.user.registry.unload_module(name)
         await m.edit(f'```[ModLoader]: 🔴"{name}" unloaded.```')
 
@@ -54,7 +57,9 @@ class LoadModuleCommand(BaseCommand):
         name = m.text.split(' ', 1)[1]
         if name not in modules_list():
             await m.edit(f'[ModLoader]: "{name}" module is not installed.')
+            return
         if name in c.user.registry.modules:
             await m.edit(f'[ModLoader]: "{name}" module is already loaded.')
+            return
         c.user.registry.load_module(name)
         await m.edit(f'[ModLoader]: 🟢"{name}" loaded.')

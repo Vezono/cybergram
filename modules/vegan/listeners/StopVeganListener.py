@@ -2,7 +2,6 @@ from pyrogram import types, Client
 
 from src.BaseListener import BaseListener
 import src.decorators as decorators
-from .vegan_command import VeganCommand
 
 
 class StopVeganListener(BaseListener):
@@ -12,4 +11,4 @@ class StopVeganListener(BaseListener):
     async def execute(self, c: Client, m: types.Message):
         if m.text == "Недостаточно выносливости!":
             await c.vegan_task.stop()
-            await c.send_message("me", "vegan ended")
+            c.user.storage.update_config({'vegan_farm': False})

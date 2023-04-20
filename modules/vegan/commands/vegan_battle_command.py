@@ -3,6 +3,7 @@ from pyrogram import types
 from src.BaseCommand import BaseCommand
 from src import decorators
 
+
 class VeganBattleCommand(BaseCommand):
     def __init__(self):
         super().__init__('vbattle')

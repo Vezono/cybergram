@@ -6,6 +6,7 @@ open("accounts.toml", 'a').close()
 with open("accounts.toml", mode="rb") as fp:
     accounts = tomli.load(fp)
 
+
 class Cybergram:
     def __init__(self):
         self.users = []
@@ -19,7 +20,8 @@ class Cybergram:
             if account == 'config':
                 continue
             api_id = accounts[account]['api_id'] if accounts[account].get('api_id') else accounts['config']['api_id']
-            api_hash = accounts[account]['api_hash'] if accounts[account].get('api_hash') else accounts['config']['api_hash']
+            api_hash = accounts[account]['api_hash'] if accounts[account].get('api_hash') else accounts['config'][
+                'api_hash']
             self.users.append(User(account, api_id, api_hash))
         idle()
 
@@ -28,5 +30,5 @@ class Cybergram:
             if user.id == user_id:
                 return user
 
+
 cybergram = Cybergram()
-    

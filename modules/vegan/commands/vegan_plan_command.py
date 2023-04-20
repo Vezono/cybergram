@@ -16,12 +16,14 @@ variants = {
     "def": "🛡Защита"
 }
 
+
 class VeganPlanCommand(BaseCommand):
     def __init__(self):
         super().__init__('plan')
-        self.last_target = "def"
 
     def load_resources(self, c: Client):
+        c.user.storage.update_config({'vegan_farm': False})
+
         schedule = c.user.schedule
         schedule.daily(dt.time(hour=7, minute=58, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send, c))
         schedule.daily(dt.time(hour=15, minute=58, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send, c))
@@ -37,10 +39,10 @@ class VeganPlanCommand(BaseCommand):
         if target not in variants:
             await c.send_message("me", f"options are: {' '.join(variants.keys())}")
             return
-        self.last_target = target
+        c.user.storage.update_config({'vegan_target': target})
 
     async def send(self, c: Client):
-        await c.send_message(5505670334, variants[self.last_target])
+        await c.send_message(5505670334, variants[c.user.storage.config.get("vegan_target")])
         await c.send_message(5505670334, "/off_goodsleep")
         await c.send_message(5505670334, "/off_greedy")
         skills = c.user.storage.config['vegan_skills']
@@ -49,7 +51,7 @@ class VeganPlanCommand(BaseCommand):
             await c.send_message(5505670334, f"/use_{skill}")
         for item in items:
             await c.send_message(5505670334, f"/takeitem_{item}")
-        self.last_target = "def"
+        c.user.storage.update_config({'vegan_target': 'def'})
 
     async def send_after(self, c: Client):
         skills = c.user.storage.config['vegan_skills']

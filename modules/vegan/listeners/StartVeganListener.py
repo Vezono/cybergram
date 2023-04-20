@@ -1,8 +1,9 @@
 from pyrogram import types, Client
 
 from src.BaseListener import BaseListener
-from .vegan_command import q_start
+from modules.vegan.commands.vegan_command import q_start
 import src.decorators as decorators
+
 
 class StartVeganListener(BaseListener):
 
@@ -11,4 +12,4 @@ class StartVeganListener(BaseListener):
     async def execute(self, c: Client, m: types.Message):
         if m.text == "🔋Энергия полностью восстановлена, вы готовы к сражению!":
             await q_start(c)
-            await c.send_message("me", "vegan started")
+            c.user.storage.update_config({'vegan_farm': True})

@@ -23,6 +23,8 @@ class VeganPlanCommand(BaseCommand):
 
     def load_resources(self, c: Client):
         c.user.storage.update_config({'vegan_farm': False})
+        c.user.storage.update_config({'vegan_items': []}) if not c.user.storage.config.get('vegan_items') else None
+        c.user.storage.update_config({'vegan_skills': []}) if not c.user.storage.config.get('vegan_skills') else None
 
         schedule = c.user.schedule
         schedule.daily(dt.time(hour=7, minute=58, tzinfo=tz_moscow), lambda: get_normal_from_async(self.send, c))

@@ -4,7 +4,7 @@ from src.BaseCommand import BaseCommand
 from src.core.Cybergram import cybergram
 
 
-class VAInfoCommand(BaseCommand):
+class VAVeganCommand(BaseCommand):
     def __init__(self):
         super().__init__('vavegan')
 

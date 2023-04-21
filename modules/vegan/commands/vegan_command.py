@@ -41,8 +41,8 @@ class VeganCommand(BaseCommand):
     def __init__(self):
         super().__init__('vegan')
 
-    async def execute(self, c: Client, m: types.Message):
-        await m.delete()
+    async def execute(self, c: Client, m: types.Message = None):
+        await m.delete() if m else None
         c.user.storage.update_config({'vegan_farm': True})
         await q_start(c)
 

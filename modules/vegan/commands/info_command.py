@@ -10,7 +10,7 @@ class VeganInfoCommand(BaseCommand):
 
     async def execute(self, c: Client, m: types.Message = None):
         config = c.user.storage.config
-        await c.send_message(5505670334, '🏅Профиль')
+        await c.send_message('@Veganochatwars_bot', '🏅Профиль')
         await m.edit('Loading profile data...') if m else None
         sleep(3)
 
